@@ -52,7 +52,7 @@ public class multiThreadvsSingleThread {
 
     public static void betterMultiThread(){
         long startTime = System.currentTimeMillis();       
-        int numThreads = 2; // to make it faster you just lower the number of threads, so then you don't have unnecessary threads that take up more time
+        int numThreads = 2; 
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
         List<Future<Long>> futures = new ArrayList<>();
         for (int i = 0; i < numThreads; i++) {
@@ -78,5 +78,6 @@ public class multiThreadvsSingleThread {
         long endTime = System.currentTimeMillis();
         System.out.println("Time For Multi Threaded Solution :: " + (endTime-startTime) + " milliseconds.");
     }
-
+    
+    // to make it faster you just lower the number of threads, so then you don't have unnecessary threads that take up more time
 }
