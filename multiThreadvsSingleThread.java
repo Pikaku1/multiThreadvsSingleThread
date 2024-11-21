@@ -61,7 +61,7 @@ public class multiThreadvsSingleThread {
                 @Override
                 public Long call() {
                     long count = 0;
-                    for (long i = threadId * 1000000; i < (threadId + 1) * 1000000; i++) {
+                    for (long i = threadId * 5000000; i < (threadId + 1) * 5000000; i++) {
                         count++;
                     }
                     return count;
