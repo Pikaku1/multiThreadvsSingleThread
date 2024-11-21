@@ -8,6 +8,7 @@ public class multiThreadvsSingleThread {
     public static void main(String[] args) {
         singleThreadSolution();
         doubleThreadSolution();
+        betterMultiThread();
     }
 
     public static void singleThreadSolution(){
@@ -21,7 +22,6 @@ public class multiThreadvsSingleThread {
     }
 
     public static void doubleThreadSolution(){
-        //to be done 
         long startTime = System.currentTimeMillis();       
         int numThreads = 1000;
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
@@ -49,4 +49,34 @@ public class multiThreadvsSingleThread {
         long endTime = System.currentTimeMillis();
         System.out.println("Time For Multi Threaded Solution :: " + (endTime-startTime) + " milliseconds.");
     }
-};
+
+    public static void betterMultiThread(){
+        long startTime = System.currentTimeMillis();       
+        int numThreads = 2; // to make it faster you just lower the number of threads, so then you don't have unnecessary threads that take up more time
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+        List<Future<Long>> futures = new ArrayList<>();
+        for (int i = 0; i < numThreads; i++) {
+            final int threadId = i;
+            futures.add(executor.submit(new Callable<Long>() {
+                @Override
+                public Long call() {
+                    long count = 0;
+                    for (long i = threadId * 1000000; i < (threadId + 1) * 1000000; i++) {
+                        count++;
+                    }
+                    return count;
+                }
+            }));
+        }
+
+        long totalCount = 0;
+        for (Future<Long> future : futures) {
+        }
+
+        executor.shutdown();
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time For Multi Threaded Solution :: " + (endTime-startTime) + " milliseconds.");
+    }
+
+}
